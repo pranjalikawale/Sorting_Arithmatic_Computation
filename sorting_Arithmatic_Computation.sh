@@ -9,6 +9,13 @@ result[" $a*$b+$c "]=$((a*b+c))
 result[" $c+$a/$b "]=$((c+a/b))
 result[" $a%$b+$c "]=`awk "BEGIN {print $a%$b+$c }"`
 
-echo "Expression "${!result[@]}
-echo "Result " ${result[@]}
+count=0
 
+echo "Expression "${!result[@]}
+
+for a in ${result[@]}
+do
+	resArray[((count++))]=$a
+done
+
+echo "Result "${resArray[@]}
