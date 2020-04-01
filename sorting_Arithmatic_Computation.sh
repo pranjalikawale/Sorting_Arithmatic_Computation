@@ -30,7 +30,7 @@ function sorting()
 	do
 		for ((j=$((i+1));j<${#arr[@]};j++))
 		do
-			if [[ ${arr[$i]} -lt ${arr[$j]} ]]
+			if [[ ${arr[$i]} -gt ${arr[$j]} ]]
 			then
 				temp=${arr[$i]}
 				arr[$i]=${arr[$j]}
@@ -38,7 +38,7 @@ function sorting()
 			fi
 		done
 	done
-	echo "Sort the reasult in decending order: " ${arr[@]}
+	echo "Sort the reasult in ascending order: " ${arr[@]}
 }
 
 create_Array "${result[@]}"
