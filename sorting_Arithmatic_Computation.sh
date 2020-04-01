@@ -6,12 +6,12 @@ declare -A result
 
 result[" $a+$b*$c "]=$((a+b*c))
 result[" $a*$b+$c "]=$((a*b+c))
-result[" $c+$a/$b "]=$((c+a/b))
+result[" $c+$a/$b "]=`awk "BEGIN {print $c+$a/$b }"`
 result[" $a%$b+$c "]=`awk "BEGIN {print $a%$b+$c }"`
 
-count=0
-
 echo "Expression "${!result[@]}
+
+count=0
 
 for a in ${result[@]}
 do
