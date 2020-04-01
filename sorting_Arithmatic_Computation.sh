@@ -12,7 +12,7 @@ result[" $a%$b+$c "]=`awk "BEGIN {print $a%$b+$c }"`
 
 function create_Array()
 {
-	COUNT=0
+	count=0
 
 	for a in "${@}"
 	do
