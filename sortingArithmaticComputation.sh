@@ -11,9 +11,9 @@ result[" $a%$b+$c "]=`awk "BEGIN {print $a%$b+$c }"`
 function createArray()
 {
 	count=0
-	for a in "${@}"
+	for val in "${@}"
 	do
-		resArray[((count++))]=$a
+		resArray[((count++))]=$val
 	done	
 	sorting "${resArray[@]}"
 }
@@ -25,7 +25,7 @@ function sorting()
 	do
 		for ((j=$((i+1));j<${#arr[@]};j++))
 		do
-			if [[ ${arr[$i]} < ${arr[$j]} ]]
+			if [[ ${arr[$i]} > ${arr[$j]} ]]
 			then
 				temp=${arr[$i]}
 				arr[$i]=${arr[$j]}
