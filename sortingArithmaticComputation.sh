@@ -35,6 +35,5 @@ function sorting()
 	done
 	echo "Sort the reasult in ascending order: " ${arr[@]}
 }
-
 createArray "${result[@]}"
 
