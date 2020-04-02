@@ -8,7 +8,7 @@ result[" $a*$b+$c "]=$((a*b+c))
 result[" $c+$a/$b "]=`awk "BEGIN {print $c+$a/$b }"`
 result[" $a%$b+$c "]=`awk "BEGIN {print $a%$b+$c }"`
 
-function create_Array()
+function createArray()
 {
 	count=0
 	for a in "${@}"
@@ -25,7 +25,7 @@ function sorting()
 	do
 		for ((j=$((i+1));j<${#arr[@]};j++))
 		do
-			if [[ ${arr[$i]} > ${arr[$j]} ]]
+			if [[ ${arr[$i]} < ${arr[$j]} ]]
 			then
 				temp=${arr[$i]}
 				arr[$i]=${arr[$j]}
@@ -36,5 +36,5 @@ function sorting()
 	echo "Sort the reasult in ascending order: " ${arr[@]}
 }
 
-create_Array "${result[@]}"
+createArray "${result[@]}"
 
