@@ -1,14 +1,12 @@
 #!/bin/bash -x
 
 read -p "Enter the three input: " a b c
-
 declare -A result
 
 result[" $a+$b*$c "]=$((a+b*c))
 result[" $a*$b+$c "]=$((a*b+c))
 result[" $c+$a/$b "]=`awk "BEGIN {print $c+$a/$b }"`
 result[" $a%$b+$c "]=`awk "BEGIN {print $a%$b+$c }"`
-
 
 function create_Array()
 {
@@ -20,7 +18,6 @@ function create_Array()
 	sorting "${resArray[@]}"
 }
 
-
 function sorting()
 {
 	arr=("${@}")
@@ -28,7 +25,7 @@ function sorting()
 	do
 		for ((j=$((i+1));j<${#arr[@]};j++))
 		do
-			if [[ ${arr[$i]} < ${arr[$j]} ]]
+			if [[ ${arr[$i]} > ${arr[$j]} ]]
 			then
 				temp=${arr[$i]}
 				arr[$i]=${arr[$j]}
