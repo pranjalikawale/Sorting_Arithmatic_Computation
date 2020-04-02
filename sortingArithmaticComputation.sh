@@ -1,53 +1,66 @@
 #!/bin/bash -x
 
-read -p "Enter the three input: " a b c
-declare -A result
+function addMultiply()
+{
+   echo $(($1+$2*$3))
+}
 
-result[" $a+$b*$c "]=$((a+b*c))
-result[" $a*$b+$c "]=$((a*b+c))
-result[" $c+$a/$b "]=`awk "BEGIN {print $c+$a/$b }"`
-result[" $a%$b+$c "]=`awk "BEGIN {print $a%$b+$c }"`
+function multiplyAdd()
+{
+   echo $(($1*$2+$3))
+}
+
+function addDivide()
+{
+   echo `awk "BEGIN {print $3+$1/$2 }"`
+}
+
+function modAdd()
+{
+   echo `awk "BEGIN {print $1%$2+$3 }"`
+}
+
+function evaluateOperation()
+{
+   declare -A result
+   result[" $a+$b*$c "]=$(addMultiply $a $b $c)
+   result[" $a*$b+$c "]=$(multiplyAdd $a $b $c)
+   result[" $c+$a/$b "]=$(addDivide $a $b $c)
+   result[" $a%$b+$c "]=$(modAdd $a $b $c)
+   createArray "${result[@]}"
+}
 
 function createArray()
 {
-	count=0
-	for a in "${@}"
-	do
-		resArray[((count++))]=$a
-	done	
-	sorting "${resArray[@]}"
+   count=0
+   for val in "${@}"
+   do
+      resultArray[((count++))]=$val
+   done
+   sorting "${resultArray[@]}"
 }
 
 function sorting()
 {
-	arr=("${@}")
-	for ((i=0;i<$((${#arr[@]}-1));i++))
-	do
-		for ((j=$((i+1));j<${#arr[@]};j++))
-		do
-			if [[ ${arr[$i]} < ${arr[$j]} ]]
-         then
-            temp=${arr[$i]}
-            arr[$i]=${arr[$j]}
-            arr[$j]=$temp
-         fi 
-		done
-	done
-	echo "Sort the reasult in decending order: " ${arr[@]}
-	
-	for ((i=0;i<$((${#arr[@]}-1));i++))
+   array=("${@}")
+   for ((i=0;i<$((${#array[@]}-1));i++))
    do
-      for ((j=$((i+1));j<${#arr[@]};j++))
+      for ((j=$((i+1));j<${#array[@]};j++))
       do
-         if [[ ${arr[$i]} > ${arr[$j]} ]]
+         if [[ ${array[$i]} < ${array[$j]} ]]
          then
-            temp=${arr[$i]}
-            arr[$i]=${arr[$j]}
-            arr[$j]=$temp
+            temp=${array[$i]}
+            array[$i]=${array[$j]}
+            array[$j]=$temp
          fi
       done
+         ascending[${#array[@]}-$i]=${array[$i]}
    done
-	echo "Sort the reasult in ascending order: " ${arr[@]}
+         ascending[${#array[@]}-$i]=${array[$i]}
+   echo "Sort the reasult in decending order: " ${array[@]}
+   echo "Sort the reasult in ascending order: " ${ascending[@]}
 }
-createArray "${result[@]}"
+
+read -p "Enter the three input: " a b c
+evaluateOperation $a $b $c
 
