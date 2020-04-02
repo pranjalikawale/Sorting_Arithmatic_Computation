@@ -1,7 +1,6 @@
 #!/bin/bash -x
 
 read -p "Enter the three input: " a b c
-
 declare -A result
 
 result[" $a+$b*$c "]=$((a+b*c))
@@ -9,8 +8,7 @@ result[" $a*$b+$c "]=$((a*b+c))
 result[" $c+$a/$b "]=`awk "BEGIN {print $c+$a/$b }"`
 result[" $a%$b+$c "]=`awk "BEGIN {print $a%$b+$c }"`
 
-
-function create_Array()
+function createArray()
 {
 	count=0
 	for a in "${@}"
@@ -19,7 +17,6 @@ function create_Array()
 	done	
 	sorting "${resArray[@]}"
 }
-
 
 function sorting()
 {
@@ -39,5 +36,5 @@ function sorting()
 	echo "Sort the reasult in ascending order: " ${arr[@]}
 }
 
-create_Array "${result[@]}"
+createArray "${result[@]}"
 
