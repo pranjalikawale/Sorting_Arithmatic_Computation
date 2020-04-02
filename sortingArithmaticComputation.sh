@@ -26,8 +26,8 @@ function evaluateOperation()
 	resultExpression[" $a+$b*$c "]=$(addMultiply $a $b $c)
 	resultExpression[" $a*$b+$c "]=$(multiplyAdd $a $b $c)
 	resultExpression[" $c+$a/$b "]=$(addDivide $a $b $c)
-   resultExpression[" $a%$b+$c "]=$(modAdd $a $b $c)
-   createArray "${resultExpression[@]}"
+    resultExpression[" $a%$b+$c "]=$(modAdd $a $b $c)
+    createArray "${resultExpression[@]}"
 }
 
 function createArray()
