@@ -11,9 +11,9 @@ result[" $a%$b+$c "]=`awk "BEGIN {print $a%$b+$c }"`
 function createArray()
 {
 	count=0
-	for a in "${@}"
+	for val in "${@}"
 	do
-		resArray[((count++))]=$a
+		resArray[((count++))]=$val
 	done	
 	sorting "${resArray[@]}"
 }
