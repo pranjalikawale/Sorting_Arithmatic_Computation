@@ -12,23 +12,22 @@ function multiplyAdd()
 
 function addDivide()
 {
-   echo `awk "BEGIN {print $3+$1/$2 }"`
+	echo `awk "BEGIN {print $3+$1/$2 }"`
 }
 
 function modAdd()
 {
-   echo `awk "BEGIN {print $1%$2+$3 }"`
+	echo `awk "BEGIN {print $1%$2+$3 }"`
 }
 
 function evaluateOperation()
 {
-	declare -A result
-	
-	result[" $a+$b*$c "]=$(addMultiply $a $b $c)
-	result[" $a*$b+$c "]=$(multiplyAdd $a $b $c)
-	result[" $c+$a/$b "]=$(addDivide $a $b $c)
-	result[" $a%$b+$c "]=$(modAdd $a $b $c)
-	createArray "${result[@]}"
+	declare -A resultExpression
+	resultExpression[" $a+$b*$c "]=$(addMultiply $a $b $c)
+	resultExpression[" $a*$b+$c "]=$(multiplyAdd $a $b $c)
+	resultExpression[" $c+$a/$b "]=$(addDivide $a $b $c)
+   resultExpression[" $a%$b+$c "]=$(modAdd $a $b $c)
+   createArray "${resultExpression[@]}"
 }
 
 function createArray()
@@ -49,15 +48,15 @@ function sorting()
 		for ((j=$((i+1));j<${#array[@]};j++))
 		do
 			if [[ ${array[$i]} < ${array[$j]} ]]
-         then
-            temp=${array[$i]}
-            array[$i]=${array[$j]}
-            array[$j]=$temp
-         fi 
+			then
+				temp=${array[$i]}
+				array[$i]=${array[$j]}
+				array[$j]=$temp
+			fi
 		done
-			ascending[${#array[@]}-$i]=${array[$i]}
+		ascending[${#array[@]}-$i]=${array[$i]}
 	done
-			ascending[${#array[@]}-$i]=${array[$i]}
+	ascending[${#array[@]}-$i]=${array[$i]}
 	echo "Sort the reasult in decending order: " ${array[@]}
 	echo "Sort the reasult in ascending order: " ${ascending[@]}
 }
