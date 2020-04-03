@@ -37,10 +37,11 @@ function createArray()
 	do
 		resultArray[((count++))]=$val
 	done
-	sorting "${resultArray[@]}"
+	sortDecending "${resultArray[@]}"
+	sortAscending "${resultArray[@]}"
 }
 
-function sorting()
+function sortDecending()
 {
 	array=("${@}")
 	for ((i=0;i<$((${#array[@]}-1));i++))
@@ -54,11 +55,26 @@ function sorting()
 				array[$j]=$temp
 			fi
 		done
-		ascending[${#array[@]}-$i]=${array[$i]}
 	done
-	ascending[${#array[@]}-$i]=${array[$i]}
 	echo "Sort the reasult in decending order: " ${array[@]}
-	echo "Sort the reasult in ascending order: " ${ascending[@]}
+}
+
+function sortAscending()
+{
+   array=("${@}")
+   for ((i=0;i<$((${#array[@]}-1));i++))
+   do
+      for ((j=$((i+1));j<${#array[@]};j++))
+      do
+         if [[ ${array[$i]} > ${array[$j]} ]]
+         then
+            temp=${array[$i]}
+            array[$i]=${array[$j]}
+            array[$j]=$temp
+         fi
+      done
+   done
+  	echo "Sort the reasult in ascending order: " ${array[@]}
 }
 
 read -p "Enter the three input: " a b c
